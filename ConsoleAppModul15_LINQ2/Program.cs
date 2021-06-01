@@ -33,7 +33,7 @@ namespace ConsoleAppModul15_LINQ2
                 listStud = listStud.Concat(classes[i].Students).ToList();
             }
 
-            return listStud.ToArray();
+            return listStud.ToArray(); 
         }
     }
 }
