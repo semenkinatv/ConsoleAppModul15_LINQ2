@@ -19,21 +19,24 @@ namespace ConsoleAppModul15_LINQ2
 
             Console.WriteLine("Список студентов всех классов:");
             Console.WriteLine(string.Join(" ", allStudents));
-
-            Console.WriteLine("\r\nОтсортированный список:");
-            Console.WriteLine(string.Join(" ", allStudents.OrderBy(st => st)));
         }
 
         public static string[] GetAllStudents(Classroom[] classes)
         {
-           List<string> listStud = new List<string>();
-          
-            for (var i = 0; i < classes.Length; i++)
-            {
-                listStud = listStud.Concat(classes[i].Students).ToList();
-            }
-
-            return listStud.ToArray(); 
+            //change 02.06.21 Semenkina Переписала объединение через select
+            var listStud = from rooms in classes
+                               from stud in rooms.Students
+                               orderby stud
+                               select stud;
+            
+            //List<string> listStud = new List<string>();
+            //for (var i = 0; i < classes.Length; i++)
+            //{
+            //    listStud = listStud.Concat(classes[i].Students).ToList();
+            //}
+            //end change 02.06.21
+           
+            return listStud.ToArray();
         }
     }
 }
